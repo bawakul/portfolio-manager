@@ -1,0 +1,12 @@
+# Ignore all project folders
+*/
+
+# But track portfolio management infrastructure
+!.claude/
+!.obsidian/
+!_Portfolio/
+!_Templates/
+
+# Track these specific files
+!README.md
+!.gitignore

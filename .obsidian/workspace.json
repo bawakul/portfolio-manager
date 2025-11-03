@@ -1,0 +1,178 @@
+{
+  "main": {
+    "id": "91fd83ed3eff05ef",
+    "type": "split",
+    "children": [
+      {
+        "id": "ae976f369674c5e9",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "38107aebe80c9d6e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "personal-site/INSPIRATION.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "INSPIRATION"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "990cab3d3667cc19",
+    "type": "split",
+    "children": [
+      {
+        "id": "336c5c0c5e324f15",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "128d1ca671780542",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "82a255bbe9d4ff97",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "71d22ebca0ab1a22",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "dc64da4fabf8a63d",
+    "type": "split",
+    "children": [
+      {
+        "id": "a8ad3c07e5963ad9",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8b2b19a25cc13379",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "personal-site/INSPIRATION.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for INSPIRATION"
+            }
+          },
+          {
+            "id": "804593e62c26a7e0",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "personal-site/INSPIRATION.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from INSPIRATION"
+            }
+          },
+          {
+            "id": "dd91abbbc8efc24c",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "44f903a593b2874b",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "personal-site/INSPIRATION.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of INSPIRATION"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "38107aebe80c9d6e",
+  "lastOpenFiles": [
+    "README.md",
+    "personal-site/README.md",
+    "personal-site/INSPIRATION.md"
+  ]
+}
