@@ -17,3 +17,15 @@
 !README.md
 !.gitignore
 !SESSIONS.md
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Obsidian workspace (personal settings)
+.obsidian/workspace.json
+.obsidian/daily-notes.json
+.obsidian/graph.json
+
+# Claude sessions (local only)
+.claude/sessions/
