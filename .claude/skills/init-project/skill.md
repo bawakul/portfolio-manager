@@ -158,6 +158,7 @@ This is a design/creative project. Focus on:
 {project-name}/
 ├── .claude/         # Project manager configuration
 ├── README.md        # This file
+├── Notes.md         # Project notes and portfolio tracking
 {type-specific-files}
 ```
 
@@ -322,7 +323,40 @@ npm-debug.log*
 (Document design choices)
 ```
 
-### 7. Initialize Git and Push to GitHub
+### 7. Create Notes.md
+
+Create `Notes.md` with frontmatter for portfolio tracking. **Content sections should be left empty as placeholders for the user to fill in.**
+
+```markdown
+---
+status: active
+type: {project-type}
+last_worked: {YYYY-MM-DD}
+next_action: "{type-specific-next-action}"
+repo: "https://github.com/{username}/{project-name}"
+---
+
+# {Project Name} - Notes
+
+## Overview
+[Brief description of what this project is and why it exists]
+
+## Current Status
+[What's working, what's blocked, what's next]
+
+## Running Notes
+[Your running notes, session summaries, and project context go here]
+```
+
+**Type-Specific Next Actions:**
+- **Product**: "Refine SPEC.md with user requirements"
+- **Personal Tool**: "Define usage patterns in USAGE.md"
+- **Experiment**: "Set learning goals in LEARNING.md"
+- **Design**: "Gather visual inspiration in INSPIRATION.md"
+
+**Important:** Only fill in the frontmatter. Leave the content sections (Overview, Current Status, Running Notes) as placeholder text in brackets for the user to write themselves.
+
+### 8. Initialize Git and Push to GitHub
 
 ```bash
 git init
@@ -332,6 +366,7 @@ git commit -m "Initial project setup
 - Initialize project structure
 - Add Claude manager configuration
 - Add project documentation
+- Add Notes.md for portfolio tracking
 
 🤖 Generated with Claude Code"
 
@@ -348,7 +383,7 @@ GitHub setup required:
 4. Run: git push -u origin main
 ```
 
-### 8. Confirmation
+### 9. Confirmation
 
 After setup completes, provide a summary:
 
@@ -356,13 +391,15 @@ After setup completes, provide a summary:
 ✓ Project initialized: {project-name}
 ✓ Type: {project-type}
 ✓ Claude manager configured
+✓ Notes.md created for portfolio tracking
 ✓ Git repository created
 ✓ Pushed to GitHub: https://github.com/{username}/{project-name}
 
 Next steps:
 1. cd "{project-name}"
-2. Open in Cursor/Claude Code
-3. {type-specific-next-step}
+2. Fill in Notes.md with your project context
+3. Open in Cursor/Claude Code
+4. {type-specific-next-step}
 
 Your project is ready to build!
 ```
