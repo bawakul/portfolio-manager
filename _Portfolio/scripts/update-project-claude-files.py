@@ -11,8 +11,8 @@ This script:
 import os
 from pathlib import Path
 
-# Portfolio root directory
-PORTFOLIO_ROOT = Path(__file__).parent.parent
+# Portfolio root directory (script is in _Portfolio/scripts/)
+PORTFOLIO_ROOT = Path(__file__).parent.parent.parent
 
 # Date format guidelines to append
 DATE_GUIDELINES = """

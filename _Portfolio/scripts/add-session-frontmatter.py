@@ -15,8 +15,8 @@ import re
 from pathlib import Path
 from datetime import datetime
 
-# Portfolio root directory
-PORTFOLIO_ROOT = Path(__file__).parent.parent
+# Portfolio root directory (script is in _Portfolio/scripts/)
+PORTFOLIO_ROOT = Path(__file__).parent.parent.parent
 
 def parse_date_from_filename(filename: str) -> datetime | None:
     """Extract date from filename in YYYY-MM-DD format."""
