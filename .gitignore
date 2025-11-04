@@ -12,8 +12,6 @@
 !_Templates/**/
 !scripts/
 !scripts/**/
-!sessions/
-!sessions/**/
 
 # Track these specific files
 !README.md
