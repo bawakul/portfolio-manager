@@ -3,10 +3,17 @@
 
 # But track portfolio management infrastructure
 !.claude/
+!.claude/**/
 !.obsidian/
+!.obsidian/**/
 !_Portfolio/
+!_Portfolio/**/
 !_Templates/
+!_Templates/**/
+!scripts/
+!scripts/**/
 
 # Track these specific files
 !README.md
 !.gitignore
+!SESSIONS.md

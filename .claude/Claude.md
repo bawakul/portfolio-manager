@@ -105,3 +105,23 @@ The portfolio manager reads these files to generate dashboards and track garden 
 Development of portfolio-manager itself is tracked in:
 - **SESSIONS.md** - Session notes for infrastructure improvements
 - **GitHub repo** - `portfolio-manager` tracks its own evolution
+
+## Date Format Guidelines
+
+When working with dates across the portfolio:
+
+- **Session filenames**: Use `YYYY-MM-DD-description.md` format (machine-sortable)
+- **Frontmatter dates**: Use ISO format `YYYY-MM-DD` (for scripts and queries)
+- **Display dates**: Use wiki links `[[DD MMM YYYY]]` (e.g., `[[03 Nov 2025]]`) for human-readable, Obsidian-linked dates
+- **Session frontmatter**: Include these fields:
+  ```yaml
+  ---
+  date: YYYY-MM-DD
+  project: project-name
+  type: session
+  claude-generated: true
+  tags: [session, planning/implementation/decision]
+  ---
+  ```
+
+This ensures consistency across the portfolio and enables Obsidian cross-referencing through wiki links.
