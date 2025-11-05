@@ -34,12 +34,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "personal-site/personal-site.md",
+                "file": "claude-mode-manager/claude-mode-manager.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "personal-site"
+              "title": "claude-mode-manager"
             }
           }
         ]
@@ -205,6 +205,10 @@
   },
   "active": "1ea732d12fd9f211",
   "lastOpenFiles": [
+    "_Portfolio/scripts/commit-project-migrations.sh",
+    "flask-rest-example/flask-rest-example.md",
+    "project-norma/project-norma.md",
+    "personal-site/personal-site.md",
     "_Portfolio/Sessions/2025-11-05-notes-migration.md",
     "_Templates/Notes-Template.md.tmp.3131.1762365304870",
     "_Portfolio/scripts/add-bawa-notes-tag.py",
@@ -217,9 +221,7 @@
     "screenshot-transcript-poc/Sessions",
     "screenshot-transcript-poc/screenshot-transcript-poc.md",
     "project-norma/Sessions",
-    "project-norma/project-norma.md",
     "personal-site/Sessions",
-    "personal-site/personal-site.md",
     "personal-library/Sessions",
     "personal-library/personal-library.md",
     "memo-transcriber/Sessions",
@@ -227,7 +229,6 @@
     "knowledge-gardener/knowledge-gardener.md",
     "internet-mindmap/internet-mindmap.md",
     "guitar-tab-viewer/guitar-tab-viewer.md",
-    "flask-rest-example/flask-rest-example.md",
     "expense-splitter/expense-splitter.md",
     "claude-mode-manager/claude-mode-manager.md",
     "ai-librarian/ai-librarian.md",
@@ -240,7 +241,6 @@
     "_Portfolio/Sessions/2025-11-03-review-planning.md",
     "_Portfolio/Sessions/2025-11-03-claude-md-rewrite.md",
     "_Portfolio/Sessions/2025-11-03-post-rename-completion.md",
-    "_Portfolio/Sessions/2025-11-03-folder-renamed.md",
     "knowledge-gardener/Bawa's Garden/Screenshot 2025-09-12 at 19.03.13.png",
     "knowledge-gardener/Bawa's Garden/Screenshot 2025-09-03 at 11.46.07.png",
     "knowledge-gardener/Bawa's Garden/Pasted image 20250904230034.png",
