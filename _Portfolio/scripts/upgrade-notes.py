@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """
-Upgrade existing Notes.md files to new template structure.
-Adds Overview, Current Status sections, and tagging convention.
+Upgrade existing Notes.md files to new structure:
+- Rename Notes.md to [project-name].md
+- Change frontmatter 'type:' to 'project_type:'
+- Adds Overview, Current Status sections, and tagging convention
 """
 
 import re
@@ -13,7 +15,7 @@ Type: #session (work summary), #reflection (insights), #planning (roadmap), #dec
 Example: "### [[DD MMM YYYY]] - Planning Session #user #planning"
 -->"""
 
-def upgrade_notes_file(notes_path):
+def upgrade_notes_file(notes_path, project_name):
     """Upgrade a Notes.md file to new template structure"""
     with open(notes_path, 'r') as f:
         content = f.read()
@@ -30,6 +32,9 @@ def upgrade_notes_file(notes_path):
 
     frontmatter = f"---{parts[1]}---"
     body = parts[2].strip()
+
+    # Update frontmatter: type: -> project_type:
+    frontmatter = frontmatter.replace('\ntype:', '\nproject_type:')
 
     # Extract project name from heading
     match = re.search(r'^# (.+?) - Notes', body, re.MULTILINE)
@@ -71,19 +76,29 @@ def main():
     # Find all Notes.md files
     upgraded = 0
     skipped = 0
+    renamed = 0
 
     for project_dir in portfolio_root.iterdir():
         if project_dir.is_dir() and not project_dir.name.startswith('.') and not project_dir.name.startswith('_'):
             notes_path = project_dir / "Notes.md"
+            new_path = project_dir / f"{project_dir.name}.md"
+
             if notes_path.exists():
-                if upgrade_notes_file(notes_path):
+                # Upgrade content
+                if upgrade_notes_file(notes_path, project_dir.name):
                     print(f"✅ Upgraded: {project_dir.name}")
                     upgraded += 1
                 else:
                     print(f"⏭️  Skipped: {project_dir.name} (already upgraded)")
                     skipped += 1
 
-    print(f"\n✨ Done! Upgraded {upgraded} files, skipped {skipped}.\n")
+                # Rename Notes.md -> [project-name].md
+                if not new_path.exists():
+                    notes_path.rename(new_path)
+                    print(f"📝 Renamed: Notes.md -> {project_dir.name}.md")
+                    renamed += 1
+
+    print(f"\n✨ Done! Upgraded {upgraded} files, renamed {renamed} files, skipped {skipped}.\n")
 
 if __name__ == "__main__":
     main()

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Populate Notes.md files for all projects in the portfolio.
+Populate [project-name].md files for all projects in the portfolio.
 Reads git activity to set initial metadata intelligently.
 """
 
@@ -67,12 +67,12 @@ def determine_status(last_commit_date):
         return 'paused'
 
 def create_notes_file(project_dir, project_name, template_path):
-    """Create Notes.md file from template with populated metadata"""
-    notes_path = project_dir / "Notes.md"
+    """Create [project-name].md file from template with populated metadata"""
+    notes_path = project_dir / f"{project_name}.md"
 
-    # Skip if Notes.md already exists
+    # Skip if [project-name].md already exists
     if notes_path.exists():
-        print(f"⏭️  {project_name}: Notes.md already exists, skipping")
+        print(f"⏭️  {project_name}: {project_name}.md already exists, skipping")
         return
 
     # Read template
@@ -91,15 +91,15 @@ def create_notes_file(project_dir, project_name, template_path):
     # Replace template placeholders
     content = content.replace("Project Name", project_name)
     content = content.replace("status: active", f"status: {status}")
-    content = content.replace("type: product", f"type: {project_type}")
+    content = content.replace("project_type: product", f"project_type: {project_type}")
     content = content.replace("last_worked: YYYY-MM-DD", f"last_worked: {last_worked}")
     content = content.replace('repo: "https://github.com/..."', f'repo: "{repo_url}"')
 
-    # Write Notes.md
+    # Write [project-name].md
     with open(notes_path, 'w') as f:
         f.write(content)
 
-    print(f"✅ {project_name}: Created Notes.md (status={status}, type={project_type}, last_worked={last_worked})")
+    print(f"✅ {project_name}: Created {project_name}.md (status={status}, project_type={project_type}, last_worked={last_worked})")
 
 def main():
     # Get portfolio root directory (parent of _Portfolio)
@@ -121,12 +121,12 @@ def main():
 
     project_dirs.sort()
 
-    print(f"\n📝 Creating Notes.md files for {len(project_dirs)} projects...\n")
+    print(f"\n📝 Creating [project-name].md files for {len(project_dirs)} projects...\n")
 
     for project_dir in project_dirs:
         create_notes_file(project_dir, project_dir.name, template_path)
 
-    print(f"\n✨ Done! Check your projects for new Notes.md files.\n")
+    print(f"\n✨ Done! Check your projects for new [project-name].md files.\n")
 
 if __name__ == "__main__":
     main()

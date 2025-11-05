@@ -26,7 +26,7 @@ Traditional project management tools break when you:
 We're in a **transition phase** where you're building the tools you need to do your job well:
 - **Build skills** (`/init-project`, `/status`, `/sync`, `/review`, etc.)
 - **Create automation** (scripts, templates, tracking systems)
-- **Improve workflows** (better Notes.md structure, Obsidian integration, etc.)
+- **Improve workflows** (better project notes structure, Obsidian integration, etc.)
 - **Develop portfolio-manager codebase** (this meta-project tracks itself)
 
 This is more active now, but will stabilize. Eventually you'll **use** these tools more than **build** them.
@@ -60,14 +60,15 @@ All projects are pushed to GitHub for tracking and backup.
 
 ## Obsidian Integration
 
-This portfolio uses Obsidian as a visual interface. Each project has a `Notes.md` file for tracking and context.
+This portfolio uses Obsidian as a visual interface. Each project has a `[project-name].md` file for tracking and context.
 
-**Notes.md Purpose:**
-- Frontmatter with metadata (status, type, last_worked, next_action, repo) for portfolio tracking
+**Project Notes Purpose:**
+- Each project creates `[project-name].md` (not `Notes.md`) for clear identification in Obsidian
+- Frontmatter with metadata (status, project_type, last_worked, next_action, repo) for portfolio tracking
 - Content sections (Overview, Current Status, Running Notes) filled in by user
-- The `/init-project` skill creates Notes.md with frontmatter only - content is user-written
+- The `/init-project` skill creates the notes file with frontmatter only - content is user-written
 
-The portfolio manager reads Notes.md frontmatter to generate dashboards and track garden health.
+The portfolio manager reads project notes frontmatter to generate dashboards and track garden health.
 
 ## Available Skills
 
@@ -81,8 +82,10 @@ The portfolio manager reads Notes.md frontmatter to generate dashboards and trac
 
 ## Session Tracking
 
+After each session, write session notes to track infrastructure development and decisions. **Ask for permission** before writing session notes to avoid overdoing it.
+
 Development of portfolio-manager itself is tracked in:
-- **SESSIONS.md** - Session notes for infrastructure improvements
+- **_Portfolio/Sessions/** - Individual session files for infrastructure work
 - **GitHub repo** - `portfolio-manager` tracks its own evolution
 
 ## Date Format Guidelines

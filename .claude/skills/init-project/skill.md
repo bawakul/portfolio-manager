@@ -32,7 +32,7 @@ Use the AskUserQuestion tool to collect:
 
 ```bash
 # Create project in the portfolio directory (current working directory)
-mkdir -p "{project-name}"
+mkdir -p "{project-name}/Sessions"
 cd "{project-name}"
 ```
 
@@ -75,6 +75,10 @@ You are a **development partner** for this {project-type} project. Your role is 
 - Focus on shipping and completion
 - Ask clarifying questions when ambiguous
 - Suggest concrete next actions
+
+## Session Tracking
+
+After each session, write session notes in `Sessions/YYYY-MM-DD-description.md`. **Ask for permission** before writing session notes to avoid overdoing it. Session notes help track progress and maintain context across sessions.
 
 ## Date Format Guidelines
 
@@ -156,9 +160,10 @@ This is a design/creative project. Focus on:
 
 ```
 {project-name}/
-├── .claude/         # Project manager configuration
+├── .claude/         # Claude configuration
+├── Sessions/        # Session notes and development log
 ├── README.md        # This file
-├── Notes.md         # Project notes and portfolio tracking
+├── {project-name}.md  # Project notes and portfolio tracking
 {type-specific-files}
 ```
 
@@ -323,17 +328,18 @@ npm-debug.log*
 (Document design choices)
 ```
 
-### 7. Create Notes.md
+### 7. Create [project-name].md
 
-Create `Notes.md` with frontmatter for portfolio tracking. **Content sections should be left empty as placeholders for the user to fill in.**
+Create `{project-name}.md` with frontmatter for portfolio tracking. **Content sections should be left empty as placeholders for the user to fill in.**
 
 ```markdown
 ---
 status: active
-type: {project-type}
+project_type: {project-type}
 last_worked: {YYYY-MM-DD}
 next_action: "{type-specific-next-action}"
 repo: "https://github.com/{username}/{project-name}"
+tags: [bawa-notes]
 ---
 
 # {Project Name} - Notes
@@ -364,9 +370,10 @@ git add .
 git commit -m "Initial project setup
 
 - Initialize project structure
-- Add Claude manager configuration
+- Add Claude configuration
 - Add project documentation
-- Add Notes.md for portfolio tracking
+- Add {project-name}.md for portfolio tracking
+- Create Sessions/ folder for development logs
 
 🤖 Generated with Claude Code"
 
@@ -390,14 +397,15 @@ After setup completes, provide a summary:
 ```
 ✓ Project initialized: {project-name}
 ✓ Type: {project-type}
-✓ Claude manager configured
-✓ Notes.md created for portfolio tracking
+✓ Claude configuration created
+✓ {project-name}.md created for portfolio tracking
+✓ Sessions/ folder created for development logs
 ✓ Git repository created
 ✓ Pushed to GitHub: https://github.com/{username}/{project-name}
 
 Next steps:
 1. cd "{project-name}"
-2. Fill in Notes.md with your project context
+2. Fill in {project-name}.md with your project context
 3. Open in Cursor/Claude Code
 4. {type-specific-next-step}
 
