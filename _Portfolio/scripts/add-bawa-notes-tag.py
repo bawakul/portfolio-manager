@@ -45,8 +45,8 @@ def add_tag_to_frontmatter(notes_path):
         # No tags field exists, add it
         frontmatter = frontmatter.rstrip() + '\ntags: [bawa-notes]'
 
-    # Reconstruct content
-    new_content = f"---{frontmatter}---{parts[2]}"
+    # Reconstruct content (ensure newline before closing ---)
+    new_content = f"---{frontmatter}\n---{parts[2]}"
 
     with open(notes_path, 'w') as f:
         f.write(new_content)
