@@ -33,6 +33,7 @@ Use the AskUserQuestion tool to collect:
 ```bash
 # Create project in the portfolio directory (current working directory)
 mkdir -p "{project-name}/Sessions"
+mkdir -p "{project-name}/.claude/hooks"
 cd "{project-name}"
 ```
 
@@ -65,6 +66,18 @@ You are a **development partner** for this {project-type} project. Your role is 
 - Over-engineer solutions - prefer simple and pragmatic
 - Add unnecessary complexity or abstractions
 - Ignore explicit project requirements or constraints
+
+## File Editing Boundaries
+
+**IMPORTANT: DO NOT edit `{project-name}.md` directly.**
+
+This file contains your project notes and context. The portfolio manager may read this file to track project status, but project Claude instances should:
+- ✅ READ the file to understand context
+- ❌ NEVER write to or modify this file
+- ✅ Suggest content for the user to add
+- ❌ Never commit changes to this file
+
+The user maintains this file manually to track their thoughts, progress, and project context.
 
 ## Project Type: {Project Type}
 
@@ -362,7 +375,36 @@ tags: [bawa-notes]
 
 **Important:** Only fill in the frontmatter. Leave the content sections (Overview, Current Status, Running Notes) as placeholder text in brackets for the user to write themselves.
 
-### 8. Initialize Git and Push to GitHub
+### 8. Setup Session Auto-Load Hook
+
+Copy the hook script from the portfolio templates and configure it:
+
+```bash
+# Copy hook script from portfolio templates
+cp "../_Templates/load-last-session.py" ".claude/hooks/load-last-session.py"
+
+# Make script executable
+chmod +x ".claude/hooks/load-last-session.py"
+```
+
+Create `.claude/settings.json` with hook configuration:
+
+```json
+{
+  "hooks": {
+    "UserPromptSubmit": [{
+      "hooks": [{
+        "type": "command",
+        "command": "./.claude/hooks/load-last-session.py"
+      }]
+    }]
+  }
+}
+```
+
+This hook will automatically load the most recent session notes (if < 7 days old) into context at the start of each conversation.
+
+### 9. Initialize Git and Push to GitHub
 
 ```bash
 git init
@@ -390,7 +432,7 @@ GitHub setup required:
 4. Run: git push -u origin main
 ```
 
-### 9. Confirmation
+### 10. Confirmation
 
 After setup completes, provide a summary:
 
@@ -398,6 +440,7 @@ After setup completes, provide a summary:
 ✓ Project initialized: {project-name}
 ✓ Type: {project-type}
 ✓ Claude configuration created
+✓ Session auto-load hook configured
 ✓ {project-name}.md created for portfolio tracking
 ✓ Sessions/ folder created for development logs
 ✓ Git repository created
