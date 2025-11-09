@@ -1,0 +1,251 @@
+# Weekly Review Generator
+
+Generate a concise weekly summary of Bawa's project work, optimized for NotebookLM audio overview.
+
+## Purpose
+
+This skill creates a 5-10 minute audio-ready review of the week's work across all portfolio projects. The review is designed for Bawa to listen to during his Tuesday morning commute, helping him reflect on what was accomplished and prepare for the week ahead.
+
+## Process
+
+### 1. Determine Date Range
+
+**Default behavior** (no parameters):
+- Generate review for the previous 7 days (Mon-Sun)
+- Use current date to calculate range
+
+**With parameter** `/review YYYY-MM-DD`:
+- Generate review starting from the specified date
+- Cover 7 days from that date
+
+**With parameter** `/review last-month`:
+- Generate review for the last 30 days
+
+### 2. Collect Data
+
+Gather information from multiple sources to build a complete picture of the week:
+
+#### A. Session Notes
+```bash
+# Find all session notes in date range
+find _Portfolio/Sessions -name "*.md" -type f
+# Also check each project's Sessions/ folder
+find */Sessions -name "*.md" -type f 2>/dev/null
+```
+
+**Extract from sessions**:
+- Key decisions made
+- Blockers encountered and how they were handled
+- "Aha moments" and insights
+- What was shipped/accomplished
+- Important context for future work
+
+**Skip from sessions**:
+- Step-by-step implementation details
+- Technical minutiae that won't matter in audio
+- Full session transcripts (extract key excerpts only)
+
+#### B. Git Activity
+```bash
+# Get commits from all projects in date range
+for dir in */; do
+  if [ -d "$dir/.git" ]; then
+    cd "$dir"
+    git log --since="YYYY-MM-DD" --until="YYYY-MM-DD" --oneline --no-merges
+    cd ..
+  fi
+done
+```
+
+**Extract**:
+- What was shipped per project
+- Commit frequency (momentum indicator)
+- Major feature completions
+
+#### C. Project Frontmatter
+```bash
+# Read frontmatter from all project notes
+for file in */*.md; do
+  # Extract YAML frontmatter (status, project_type, last_worked, next_action)
+done
+```
+
+**Extract**:
+- Status changes (active → paused, etc.)
+- Next actions planned
+- Project types
+- Last worked dates
+
+#### D. GitHub Activity (Optional)
+```bash
+# Check for issues/PRs in date range if needed
+gh issue list --search "created:>=YYYY-MM-DD"
+gh pr list --search "created:>=YYYY-MM-DD"
+```
+
+### 3. Categorize Projects
+
+Based on collected data, categorize each project:
+
+- **Active**: Had commits or session notes in the date range
+- **Paused**: No activity but status is "paused" with reason
+- **New**: Initialized during this period
+- **Dormant**: No activity and no explicit status
+
+### 4. Generate Review Document
+
+Create the review using this structure:
+
+```markdown
+---
+NOTEBOOKLM AUDIO OVERVIEW INSTRUCTIONS:
+
+This is a weekly review of Bawa's work for the week of [START DATE] to [END DATE].
+Bawa will be listening to this during his Tuesday morning commute to reflect on his work.
+
+When creating the audio overview:
+- This is about Bawa's project work - what he built, decided, and learned this week
+- He's the audience - he's listening to understand his own week
+- Focus on key decisions, insights, and what matters for context going forward
+- Keep it 5-10 minutes - highlight what's most important
+- Help him reflect and think about what's next
+
+The content below summarizes his week across multiple projects in his digital garden.
+---
+
+# Weekly Review: [START DATE] to [END DATE]
+
+**Generated:** [TIMESTAMP]
+
+## Executive Summary
+
+[2-3 paragraphs: What was the vibe of this week? What themes emerged? What got momentum, what stalled? What's the big picture?]
+
+**Active Projects:** [Number] projects with activity this week
+**Key Accomplishments:** [Top 3-5 highlights]
+
+---
+
+## Projects Active This Week
+
+### [Project Name] ([Project Type]) - [Status]
+
+**What happened:** [Narrative summary from sessions + commits - focus on decisions, blockers, breakthroughs]
+
+**Shipped:** [Commit highlights, features completed]
+
+**Key insights:** [Important learnings or decisions]
+
+**Next:** [Next actions from frontmatter/sessions]
+
+[Repeat for each active project]
+
+---
+
+## Cross-Project Insights
+
+**Themes:** [Common patterns across projects - e.g., "infrastructure week", "exploration phase", "decision-making week"]
+
+**Learnings:** [Key "aha moments" or insights that apply beyond individual projects]
+
+**Energy distribution:** [What kind of work got attention - building vs planning vs experimenting]
+
+---
+
+## Portfolio Status
+
+**Active (building now):**
+- [Project names with brief context]
+
+**Paused (waiting for):**
+- [Project names with reason - skill gap, decision needed, etc.]
+
+**New (initialized this week):**
+- [Project names with vision]
+
+**Momentum indicators:**
+- Commits: [Total] across [N] projects
+- Sessions: [Total] tracked
+- Issues/PRs: [If significant]
+
+---
+
+## The Week Ahead
+
+[Based on next_action frontmatter, momentum indicators, and session notes - what might be worked on next? What's ready to move forward? What decisions need to be made?]
+
+---
+
+**Generated by:** Portfolio Manager
+**Purpose:** Weekly reflection audio for Tuesday commute
+**Next review:** [Date of next Monday]
+```
+
+### 5. Save the Review
+
+```bash
+# Save to Weekly Reviews folder
+OUTPUT_FILE="_Portfolio/Weekly Reviews/YYYY-MM-DD-to-YYYY-MM-DD.md"
+# Write content to file
+# Confirm location to user
+```
+
+### 6. Output Confirmation
+
+After generating the review, provide:
+- File path where review was saved
+- Word count (target: 750-1500 words)
+- Estimated audio length (word count ÷ 150 ≈ minutes)
+- Next steps: "Upload to NotebookLM for audio generation"
+
+## Content Guidelines
+
+### Keep It Concise
+- **Target**: 750-1500 words total
+- **Per project**: 100-200 words max
+- **Executive summary**: 150-250 words
+- **Focus on what matters**: Decisions, insights, context for future work
+
+### Narrative Style
+- Write for human listening (via NotebookLM)
+- Use clear, conversational language
+- Avoid jargon dumps - spell out acronyms
+- Tell the story of the week, not just facts
+
+### What to Include
+✅ Key decisions and why they were made
+✅ Blockers discovered and how handled
+✅ "Aha moments" and insights
+✅ What was shipped/accomplished
+✅ Important context for future work
+✅ Cross-project patterns and themes
+
+### What to Skip
+❌ Step-by-step implementation details
+❌ Full session transcripts
+❌ Technical minutiae
+❌ Code snippets or commands
+❌ Minor bug fixes or tweaks
+
+## Error Handling
+
+- If no session notes found: Generate review from git commits only
+- If no git activity: Generate from session notes only
+- If neither: Output message "No activity in this date range"
+- If date parsing fails: Show clear error with expected format
+
+## Success Criteria
+
+- Review generates in under 30 seconds
+- Output is consistently 750-1500 words
+- Captures key moments from the week
+- Reads naturally when spoken aloud (test by reading to yourself)
+- File saved to correct location with correct naming
+
+## Future Enhancements
+
+- Auto-open NotebookLM upload URL after generation
+- Integration with NotebookLM API (if/when available)
+- Smart excerpt extraction (ML-based key phrase detection)
+- Trend analysis across multiple weeks
+- Audio length estimation based on NotebookLM's actual output
