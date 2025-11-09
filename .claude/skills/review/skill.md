@@ -28,10 +28,13 @@ Gather information from multiple sources to build a complete picture of the week
 #### A. Session Notes
 ```bash
 # Find all session notes in date range
+# 1. Portfolio sessions
 find _Portfolio/Sessions -name "*.md" -type f
-# Also check each project's Sessions/ folder
-find */Sessions -name "*.md" -type f 2>/dev/null
+# 2. CRITICAL: Check EACH project's Sessions/ folder
+find */Sessions -name "*.md" -type f 2>/dev/null | grep -v "_Portfolio/Sessions" | grep -v "_Templates"
 ```
+
+**IMPORTANT:** Project-specific sessions (e.g., `project-norma/Sessions/`) often contain the most substantive work. Always prioritize project sessions over portfolio infrastructure sessions when both exist.
 
 **Extract from sessions**:
 - Key decisions made
@@ -62,15 +65,20 @@ done
 - Commit frequency (momentum indicator)
 - Major feature completions
 
-#### C. Project Frontmatter
+#### C. Project Frontmatter & Descriptions
 ```bash
 # Read frontmatter from all project notes
 for file in */*.md; do
   # Extract YAML frontmatter (status, project_type, last_worked, next_action)
 done
+# Also read project CLAUDE.md for "Project Vision" section
+for file in */.claude/CLAUDE.md; do
+  # Extract project description
+done
 ```
 
 **Extract**:
+- **Project descriptions** - What is this project? (from notes or CLAUDE.md)
 - Status changes (active → paused, etc.)
 - Next actions planned
 - Project types
@@ -103,14 +111,23 @@ NOTEBOOKLM AUDIO OVERVIEW INSTRUCTIONS:
 This is a weekly review of Bawa's work for the week of [START DATE] to [END DATE].
 Bawa will be listening to this during his Tuesday morning commute to reflect on his work.
 
-When creating the audio overview:
-- This is about Bawa's project work - what he built, decided, and learned this week
-- He's the audience - he's listening to understand his own week
-- Focus on key decisions, insights, and what matters for context going forward
-- Keep it 5-10 minutes - highlight what's most important
-- Help him reflect and think about what's next
+CONTEXT: Bawa is vibe-coding - working fluidly across multiple creative projects with Claude
+as a thinking partner. He's exploring ideas, making creative decisions, and having breakthroughs.
+This is NOT traditional software development - it's creative exploration with code.
 
-The content below summarizes his week across multiple projects in his digital garden.
+When creating the audio overview:
+- Focus on the CREATIVE JOURNEY and INSIGHTS, not technical implementation details
+- Emphasize WHY decisions were made, WHAT was learned, and AHA MOMENTS
+- Each project summary should start with what the project IS and why it matters
+- De-emphasize file names, commit messages, and technical specifics
+- Highlight: breakthroughs, realizations, creative decisions, interesting problems solved
+- Skip: "built X.py", "created Y folder", "updated Z config" unless it reveals insight
+- This is about reflection and storytelling, not documentation
+- Keep it 5-10 minutes total
+- Help him see the through-line and creative momentum
+
+TONE: Conversational and insight-focused. Like discussing creative work with a colleague,
+not reading a changelog. The interesting part is the thinking, not the artifacts.
 ---
 
 # Weekly Review: [START DATE] to [END DATE]
@@ -130,13 +147,15 @@ The content below summarizes his week across multiple projects in his digital ga
 
 ### [Project Name] ([Project Type]) - [Status]
 
-**What happened:** [Narrative summary from sessions + commits - focus on decisions, blockers, breakthroughs]
+**What it is:** [1-2 sentence project description - what is this project trying to do? Read from project notes or CLAUDE.md]
 
-**Shipped:** [Commit highlights, features completed]
+**Where you're at:** [Current stage - early exploration? building prototype? polishing? paused waiting for X?]
 
-**Key insights:** [Important learnings or decisions]
+**This week's journey:** [NARRATIVE focused on insights and creative decisions, not technical details. What did you discover? What clicked? What problems did you solve? What decisions did you make and why? Tell the story of the work, not a list of files created.]
 
-**Next:** [Next actions from frontmatter/sessions]
+**The breakthrough:** [If there was an "aha moment" or key realization, highlight it here]
+
+**What's next:** [Based on momentum and session notes - where is this heading?]
 
 [Repeat for each active project]
 
@@ -202,30 +221,49 @@ After generating the review, provide:
 
 ### Keep It Concise
 - **Target**: 750-1500 words total
-- **Per project**: 100-200 words max
+- **Per project**: 150-250 words (more for highly active projects)
 - **Executive summary**: 150-250 words
-- **Focus on what matters**: Decisions, insights, context for future work
+- **Focus on what matters**: Creative journey, insights, breakthroughs
 
-### Narrative Style
-- Write for human listening (via NotebookLM)
-- Use clear, conversational language
-- Avoid jargon dumps - spell out acronyms
-- Tell the story of the week, not just facts
+### Narrative & Insight-Focused
+- **This is vibe-coding** - creative exploration with Claude as thinking partner
+- Tell the story of discovery and creative decisions
+- Emphasize WHY over HOW
+- Write for reflection, not documentation
+- Use conversational language (like discussing with a colleague)
+- Start each project with context (what IS this project?)
 
 ### What to Include
-✅ Key decisions and why they were made
-✅ Blockers discovered and how handled
-✅ "Aha moments" and insights
-✅ What was shipped/accomplished
-✅ Important context for future work
-✅ Cross-project patterns and themes
+✅ **Project context** - What is this? Why does it matter? What stage are you at?
+✅ **Creative breakthroughs** - "Aha moments", realizations, things that clicked
+✅ **Interesting decisions** - Why you chose X over Y (not just that you did)
+✅ **Problems solved** - The challenge and the insight, not the implementation
+✅ **Learning moments** - What you discovered or figured out
+✅ **Momentum indicators** - What's energized? What's stuck? Why?
+✅ **Cross-project themes** - Patterns in your creative process
 
-### What to Skip
-❌ Step-by-step implementation details
-❌ Full session transcripts
-❌ Technical minutiae
-❌ Code snippets or commands
-❌ Minor bug fixes or tweaks
+### What to De-emphasize or Skip
+⚠️ File names, folder structures, commit messages (unless they reveal insight)
+⚠️ "Built X.py, created Y.md, updated Z config" (boring!)
+⚠️ Technical implementation details (how you wrote the code)
+⚠️ Step-by-step chronology (unless it tells a story)
+❌ Code snippets or command syntax
+❌ Minor bug fixes, formatting changes, infrastructure tweaks
+❌ Jargon without context
+
+### Example Transformations
+
+**❌ Technical/boring:**
+"Built consolidate.py script with Claude API integration. Created test_segments.json with mode labels. Tested with three segments and generated consolidated_output.txt."
+
+**✅ Insight/narrative:**
+"Had the breakthrough that this is really a two-stage problem: Whisper just transcribes, but the magic happens when Claude weaves inline responses into the dictation. Built a quick prototype to test it - and it worked perfectly. The responses flow naturally, like having a conversation mid-thought."
+
+**❌ Technical/boring:**
+"Installed ffmpeg via Homebrew (89 dependencies). Tested base vs tiny Whisper model. Base model took 38 seconds on CPU, tiny took 25 seconds on GPU."
+
+**✅ Insight/narrative:**
+"Discovered that Whisper's 'base' model is actually way better at understanding context - it got 'limbic capitalism' right where the tiny model mangled it. The extra 13 seconds of processing is totally worth it for quality. Also confirmed ffmpeg can split audio at exact timestamps, which is perfect for the Intercom Button concept."
 
 ## Error Handling
 
